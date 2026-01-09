@@ -21,7 +21,7 @@ After the bootstrap process, you should see output like this:
     default: [BOOTSTRAP] Done!
 ```
 
-You'll need your new VM's IP address to configure the game and to access to Grafana. You can use `vagrant ssh` to connect to your VM and find the IP address yourself. You can also use the command below in Windows PowerShell (IP address can be seen as 192.168.1.55 in this example):
+You'll need your new VM's IP address to configure the game and access to Grafana. You can use `vagrant ssh` to connect to your VM and find the IP address yourself. You can also use the command below in Windows PowerShell (IP address can be seen as 192.168.1.55 in this example):
 
 ```
 PS D:\Projeler\Telemetry-Scan> vagrant ssh -c "ip -4 route show default | tr -s ' '"
@@ -88,17 +88,25 @@ Note: Telemetry Scan sets TimescaleDB as Grafana's data source during initializa
 
 *Grafana Core View Dashboard*
 
+<hr>
+
 ![Early Upshift](img/early-upshift.png "Early Upshift")
 
 *Early upshift. Full throttle at low RPM and low speed.*
+
+<hr>
 
 ![Over-revving](img/over-revving.png "Over-revving")
 
 *Over-revving. Held the gear too long. High RPM at low speed.*
 
+<hr>
+
 ![Potential Brake Lock](img/potential-brake-lock.png "Potential Brake Lock")
 
 *Potential brake lock. 100% throttle + 100% brake overlap.*
+
+<hr>
 
 ![Throttle-Brake Overlap](img/throttle-brake-overlap.png "Throttle-Brake Overlap")
 
@@ -106,14 +114,14 @@ Note: Telemetry Scan sets TimescaleDB as Grafana's data source during initializa
 
 ## Under the Hood
 
-I'm still learning most of the components in this stack. I built it for personal use and decided to release it under the GPLv3. Security wasn't a concern for this project. All credentials are stored in plain text, which is obviously not best practice. Use it with caution.
+I'm still learning most of the components in this stack. I built it for personal use and decided to release it under the GPLv3. Security wasn't a concern for this project. All credentials are stored in plain text, which is obviously not best practice. The appliance uses a bridged network by default to avoid port forwarding. Use it with caution. Don't expose it to a public network.
 
 ### Credentials
 
-Grafana user: admin
-Grafana password: telemetryscan
-TimescaleDB name: f1
-TimescaleDB user: f1
+Grafana user: admin<br>
+Grafana password: telemetryscan<br>
+TimescaleDB name: f1<br>
+TimescaleDB user: f1<br>
 TimescaleDB password: f1pass
 
 ### bootstrap.sh
