@@ -1,0 +1,17 @@
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+      - name: TimescaleDB
+        type: postgres
+        access: proxy
+        url: timescaledb:5432
+        uid: timescaledb
+        user: f1
+        secureJsonData:
+          password: f1pass
+        jsonData:
+          database: f1
+          sslmode: "disable"
+          timescaledb: true
+        isDefault: true

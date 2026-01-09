@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: telemetry-gateway
+  namespace: f1
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: telemetry-gateway
+  template:
+    metadata:
+      labels:
+        app: telemetry-gateway
+    spec:
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      terminationGracePeriodSeconds: 3
+      containers:
+        - name: telemetry-gateway
+          image: alisezisli/telemetry-gateway:latest
+          imagePullPolicy: Always
+          env:
+            - name: UDP_HOST
+              value: "0.0.0.0"
+            - name: UDP_PORT
+              value: "20777"
+            - name: DB_HOST
+              value: "timescaledb"
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_NAME
+              value: "f1"
+            - name: DB_USER
+              value: "f1"
+            - name: DB_PASSWORD
+              value: "f1pass"
+            - name: DB_TABLE
+              value: "telemetry_stream"
+            - name: SAMPLE_EVERY_N_FRAMES
+              value: "6"
+          ports:
+            - name: f1-udp
+              containerPort: 20777
+              protocol: UDP
